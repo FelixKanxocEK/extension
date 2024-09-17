@@ -8,4 +8,8 @@ export class OmbuExtensions{
     @Column()
     name: string;
 
+    @Column()
+    extension: number;
+
+
 }
