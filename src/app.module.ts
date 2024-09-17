@@ -4,8 +4,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import {TypeOrmModule} from '@nestjs/typeorm'
 import { APP_FILTER } from '@nestjs/core';
 import { EntityModule } from './entity/entity.module';
-import { extensions } from 'pixi.js';
 import { ExtensionsModule } from './extensions/extensions.module';
+import { ContactsModule } from './contacts/contacts.module';
 
 @Module({
   imports: [
@@ -35,7 +35,8 @@ import { ExtensionsModule } from './extensions/extensions.module';
       inject: [ConfigService]
     }),
     EntityModule,
-    ExtensionsModule
+    ExtensionsModule,
+    ContactsModule
   ],
   controllers:[AppController],
   providers: [

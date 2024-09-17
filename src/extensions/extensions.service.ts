@@ -11,7 +11,7 @@ export class ExtensionsService {
 
     async find(){
         try {
-            return await this.OmbuExtensionsRepository.find()
+            return await this.OmbuExtensionsRepository.find();
         } catch (error) {
             return[]
         }

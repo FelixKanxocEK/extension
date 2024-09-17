@@ -11,5 +11,7 @@ export class OmbuExtensions{
     @Column()
     extension: number;
 
+    @Column()
+    external_cid: number;
 
 }
