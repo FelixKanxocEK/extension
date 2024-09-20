@@ -16,4 +16,7 @@ export class OmbuContacts{
 
     @Column()
     prefix: string;
+
+    @Column()
+    phone: string;
 }

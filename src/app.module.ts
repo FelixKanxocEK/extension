@@ -6,6 +6,7 @@ import { APP_FILTER } from '@nestjs/core';
 import { EntityModule } from './entity/entity.module';
 import { ExtensionsModule } from './extensions/extensions.module';
 import { ContactsModule } from './contacts/contacts.module';
+import { SipasswordModule } from './sipassword/sipassword.module';
 
 @Module({
   imports: [
@@ -36,7 +37,8 @@ import { ContactsModule } from './contacts/contacts.module';
     }),
     EntityModule,
     ExtensionsModule,
-    ContactsModule
+    ContactsModule,
+    SipasswordModule,
   ],
   controllers:[AppController],
   providers: [
