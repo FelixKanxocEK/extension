@@ -1,19 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { extensions } from 'pixi.js';
+import { CdrService } from 'src/cdr/cdr.service';
 import { OmbuExtensions } from 'src/entity/ombutel_extensions.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class ExtensionsService {
     constructor(
-        @InjectRepository(OmbuExtensions) private readonly OmbuExtensionsRepository: Repository<OmbuExtensions>
+        @InjectRepository(OmbuExtensions, 'ombutel') private readonly OmbuExtensionsRepository: Repository<OmbuExtensions>,
+        private readonly CdrService: CdrService
     ){}
 
     async find(){
         try {
-            return await this.OmbuExtensionsRepository.find()
+            const extensions = await this.OmbuExtensionsRepository.find();
+
+            const cdr = await this.CdrService.find();
+
+            return {
+                extensions,
+                cdr,
+            }
         } catch (error) {
-            return[]
+            return {
+                extensions: [],
+                cdr: [],
+            }
         }
     }
 }
