@@ -2,11 +2,13 @@ import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { OmbuExtensions } from './ombutel_extensions.entity';
 import { CdrAsterisk } from './cdr.entity';
+import { OmbuContacts } from './ombu_contacts.entity';
 @Global()
 @Module({
     imports:[
         TypeOrmModule.forFeature([
-            OmbuExtensions
+            OmbuExtensions,
+            OmbuContacts,
         ], 'ombutel'),
         TypeOrmModule.forFeature([
             CdrAsterisk

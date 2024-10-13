@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import {TypeOrmModule, TypeOrmModuleOptions} from '@nestjs/typeorm'
+import { TypeOrmModule } from '@nestjs/typeorm'
 import { ExtensionsModule } from './extensions/extensions.module';
 import { OmbuExtensions } from './entity/ombutel_extensions.entity';
 import { CdrAsterisk } from './entity/cdr.entity';
 import { CdrModule } from './cdr/cdr.module';
 import { EntityModule } from './entity/entity.module';
+import { OmbuContacts } from './entity/ombu_contacts.entity';
 
 const configService = new ConfigService;
 
@@ -29,6 +30,7 @@ const configService = new ConfigService;
       synchronize: false,
       entities: [
         OmbuExtensions,
+        OmbuContacts,
       ]
     }),
     TypeOrmModule.forRoot({

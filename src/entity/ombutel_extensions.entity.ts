@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { OmbuContacts } from "./ombu_contacts.entity";
 
 @Entity('ombu_extensions')
 export class OmbuExtensions{
@@ -11,5 +12,10 @@ export class OmbuExtensions{
     @Column()
     extension: number;
 
+    @Column()
+    did_number: string;
+
+    @OneToOne(type => OmbuContacts, OmbuContacts => OmbuContacts.extension)
+    contact: OmbuContacts;
 
 }

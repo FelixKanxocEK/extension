@@ -14,7 +14,7 @@ export class ExtensionsService {
 
     async find(){
         try {
-            const extensions = await this.OmbuExtensionsRepository.find();
+            const extensions = await this.OmbuExtensionsRepository.find({relations: { contact: true }});
 
             const cdr = await this.CdrService.find();
 
