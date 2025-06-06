@@ -54,12 +54,13 @@ export class ExtensionsService {
 
             if (reports.length > 0) {
                 const costs = await this.OmbuCostsRepository.find();
-
+                
                 if (costs.length == 0) {
                     return [];
                 }
-
+                
                 const new_list_reports = [];
+                let total_final_cost = 0;
                 reports.forEach(report => {
                     if (report.dstchannel && report.lastapp) {
                         const report_data = { ...report };
@@ -71,18 +72,31 @@ export class ExtensionsService {
                             // Calculamos el costo
                             const total_cost = new Decimal(time).mul(cost_carrier.costo).toDP(2).toNumber();
                             report_data.Costo = total_cost;
+                            total_final_cost = new Decimal(total_final_cost).add(total_cost).toNumber();
                         } else {
                             report_data.Costo = 0;
                         }
                         new_list_reports.push(report_data);
                     }
                 });
-                return new_list_reports;
+                return {
+                    total_cost: total_final_cost,
+                    total_calls: new_list_reports.length,
+                    list_reports: new_list_reports,
+                };
             }
-            return [];
+            return {
+                total_cost: 0,
+                total_calls: 0,
+                list_reports: [],
+            };
         } catch (error) {
             console.error(error, ' error');
-            return [];
+            return {
+                total_cost: 0,
+                total_calls: 0,
+                list_reports: [],
+            };
         } finally {
             await queryRunner.release();
         }
